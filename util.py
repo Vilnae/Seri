@@ -17,7 +17,7 @@ def parse():
     args['url'] = args['url'].strip()
     args['output'] = args['output'].strip()
     args['book_title'] = args['book_title'].strip()
-    
+
     return args
 
 
@@ -25,8 +25,9 @@ def parse():
 def scrap(url):
     request = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     html = urlopen(request).read()
-    
+
     return html
+
 
 # Checks if the text or class of a tag indicates it belongs to a relevant class
 def in_list(type, tag):
@@ -42,7 +43,7 @@ def in_list(type, tag):
             text = " ".join(tag['class'])
         else:
             text = tag['class'][0]
-    
+
     elif type == 'title':
         accepts = ["font-white"]
         if not tag.has_attr('class'):
@@ -61,6 +62,9 @@ def in_list(type, tag):
         else:
             text = tag['class'][0]
 
+    else:
+        raise Exception("Wrong or missing type")
+
     for accept in accepts:
         if text.strip().lower() == accept:
             return True
@@ -76,7 +80,7 @@ def get_part(title):
     match = re.search(r".+\s(\d+)/\d+$", title)
     if match is not None:
         return int(match.group(1))
-    
+
     # part 1 (of 2)
     match = re.search(r".+\spart\s(\d+)(\sof\s\d+)?$", title)
     if match is not None:
