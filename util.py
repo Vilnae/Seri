@@ -12,6 +12,7 @@ def parse():
     parser.add_argument('-t', '--book_title', default="", help="Book title")
     parser.add_argument('-e', "--epub", action='store_true', help="Compile serial into epub")
     parser.add_argument('-g', '--group', action='store_true', help='Heuristically merge split chapters')
+    parser.add_argument('-n', '--note', action='store_true', help="Add Author's notes")
 
     args = vars(parser.parse_args())
     args['url'] = args['url'].strip()

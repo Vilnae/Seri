@@ -9,6 +9,7 @@ class Scrapper:
         self.root = args['url']
         self.group = args['group']
         self.book_title = args['book_title']
+        self.add_note = args['note']
 
     def run(self):
         next = self.root
@@ -29,7 +30,9 @@ class Scrapper:
             title = title.text
 
             # Find authors note
-            note = soup.find(lambda tag: tag.name == 'div' and util.in_list('note', tag))
+            note = None
+            if self.add_note:
+                note = soup.find(lambda tag: tag.name == 'div' and util.in_list('note', tag))
             note = str(note)
 
             # Find chapter contents

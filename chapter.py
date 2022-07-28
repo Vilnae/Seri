@@ -65,6 +65,8 @@ class Chapter:
                     """
         suffix = "</body></html>"
 
-        if self.note is not None:
-            return prefix + header + self.note + "<hr>" + self.content + suffix
+        note = "<h3>Author's note:</h3>" + self.note + "<hr/>"
+
+        if str(self.note) != "None":
+            return prefix + header + note + self.content + suffix
         return prefix + header + self.content + suffix
