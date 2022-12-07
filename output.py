@@ -11,10 +11,10 @@ def run(args, chapters):
         for chapter in chapters:
             i = str(chapter.index).zfill(4)
 
-            sterile = chapter.title[:20].strip()
-            sterile = re.sub(r"""["*\\/'.|?:<>]""", "_", sterile)
+            sanitize = chapter.title[:35].strip()
+            sanitize = re.sub(r"""["*\\/'’ .|?:<>%– ]""", "_", sanitize)
 
-            name = "Chapter " + i + "_" + sterile + ".html"
+            name = "Chapter " + i + "_" + sanitize + ".html"
             file_loc = os.path.join(loc, name)
             with open(file_loc, 'wb') as f:
                 f.write(str(chapter).encode("utf-8"))

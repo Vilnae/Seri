@@ -58,7 +58,7 @@ class Chapter:
                       <title>""" + self.book_title + """</title>
                       <link href="../Styles/stylesheet.css" rel="stylesheet" type="text/css"/>
                     </head>
-                    <body>
+                    <body lang="en">
                       """
         header = "<h2>" + self.title + """</h2>        
                     <img alt="Decoration" src="../Images/ornaments_1.jpg"/>

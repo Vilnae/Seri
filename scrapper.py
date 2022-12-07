@@ -6,10 +6,10 @@ from urllib.parse import urljoin
 
 class Scrapper:
     def __init__(self, args):
-        self.root = args['url']
-        self.group = args['group']
-        self.book_title = args['book_title']
-        self.add_note = args['note']
+        self.root = args["url"]
+        self.group = args["group"]
+        self.book_title = args["book_title"]
+        self.add_note = args["note"]
 
     def run(self):
         next = self.root
@@ -22,21 +22,28 @@ class Scrapper:
             soup = Soup(html, "html.parser")
 
             # Find next chapter URL
-            link = soup.find(lambda tag: tag.name == 'a' and util.in_list('next', tag))
-            next = urljoin(next, link['href']) if link else None
+            link = soup.find(lambda tag: tag.name == "a" and util.in_list("next", tag))
+            next = urljoin(next, link["href"]) if link else None
 
             # Find chapter title
-            title = soup.find(lambda tag: tag.name in ['h1', 'h2', 'h3'] and util.in_list('title', tag))
+            title = soup.find(
+                lambda tag: tag.name in ["h1", "h2", "h3"]
+                and util.in_list("title", tag)
+            )
             title = title.text
 
             # Find authors note
             note = None
             if self.add_note:
-                note = soup.find(lambda tag: tag.name == 'div' and util.in_list('note', tag))
+                note = soup.find(
+                    lambda tag: tag.name == "div" and util.in_list("note", tag)
+                )
             note = str(note)
 
             # Find chapter contents
-            content = soup.find(lambda tag: tag.name == 'div' and util.in_list('content', tag))
+            content = soup.find(
+                lambda tag: tag.name == "div" and util.in_list("content", tag)
+            )
             content = str(content)
 
             # Check if chapter part of split, merge if necessary

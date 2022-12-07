@@ -33,7 +33,7 @@ def scrap(url):
 # Checks if the text or class of a tag indicates it belongs to a relevant class
 def in_list(type, tag):
     if type == 'next':
-        accepts = ["next chapter"]
+        accepts = ["next chapter", "next"]
         text = tag.text
 
     elif type == 'note':
@@ -46,7 +46,7 @@ def in_list(type, tag):
             text = tag['class'][0]
 
     elif type == 'title':
-        accepts = ["font-white"]
+        accepts = ["font-white", "entry-title"]
         if not tag.has_attr('class'):
             return False
         if len(tag['class']) > 1:
@@ -55,7 +55,7 @@ def in_list(type, tag):
             text = tag['class'][0]
 
     elif type == 'content':
-        accepts = ["chapter-inner chapter-content"]
+        accepts = ["chapter-inner chapter-content", "entry-content"]
         if not tag.has_attr('class'):
             return False
         if len(tag['class']) > 1:
