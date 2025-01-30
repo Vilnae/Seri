@@ -3,7 +3,7 @@ import output
 from chapter import Chapter
 from bs4 import BeautifulSoup as Soup
 from urllib.parse import urljoin
-from time import time
+from time import time, sleep
 from datetime import timedelta
 
 
@@ -24,6 +24,7 @@ class Scrapper:
 
         while next:
             # Scrap HTML
+            sleep(1)
             html = util.scrap(next)
             soup = Soup(html, "html.parser")
             curr = next
